@@ -6,7 +6,8 @@ module Cinch
   module Twitter
     class Simple
         include Cinch::Plugin
-        match /twitter\.com\/[A-z0-9_]+\/status\/(\d+)/
+
+        match /twitter\.com\/[A-z0-9_]+\/status\/(\d+)/, { :use_prefix => false }
 
         def self.get_tweet(tweet_id)
             client = ::Twitter::REST::Client.new do |config|
