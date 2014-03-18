@@ -1,6 +1,6 @@
 # Cinch::Twitter::Simple
 
-TODO: Write a gem description
+A Simple Cinch IRC bot plugin that watches chat for tweet urls and responds to them with the tweet's text.
 
 ## Installation
 
@@ -18,12 +18,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Set the TWITTER_KEY and TWITTER_SECRET environment variables and then:
 
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+    bot = Cinch::Bot.new do
+      configure do |c|
+        c.server   = "irc.freenode.org"
+        c.channels = ["#cinch-bots"]
+        c.plugins.plugins = [Cinch::Twitter::Simple]
+      end
+    end
