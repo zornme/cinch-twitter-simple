@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Cinch::Twitter::Simple::VERSION
   spec.authors       = ["Matt Zorn"]
   spec.email         = ["zornme@gmail.com"]
-  spec.description   = %q{ Write a gem description}
-  spec.summary       = %q{ Write a gem summary}
+  spec.description   = %q{Cinch IRC bot plugin that watches chat for tweet urls and responds to them with the tweet's text.}
+  spec.summary       = %q{Simple Cinch IRC bot plugin}
   spec.homepage      = ""
   spec.license       = "MIT"
 
