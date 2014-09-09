@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-Set the TWITTER_KEY and TWITTER_SECRET environment variables and then:
+Set the TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET environment variables and then:
 
     bot = Cinch::Bot.new do
       configure do |c|
@@ -27,3 +27,5 @@ Set the TWITTER_KEY and TWITTER_SECRET environment variables and then:
         c.plugins.plugins = [Cinch::Twitter::Simple]
       end
     end
+
+Set TWITTER_ACCESS_TOKEN and TWITTER_ACCESS_SECRET as well if you would like to post tweets from the bot.
