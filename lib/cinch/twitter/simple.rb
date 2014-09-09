@@ -6,8 +6,8 @@ module Cinch
     module Twitter
         class Simple
             include Cinch::Plugin
+            attr_reader :twitter_client
 
-            match /twitter\.com\/[A-z0-9_]+\/status\/(\d+)/, { :use_prefix => false }
 
             def initialize(*args)
                 super
@@ -18,15 +18,28 @@ module Cinch
                 end
             end
 
-            def get_tweet(tweet_id)
-                @twitter_client.status(tweet_id)
-            rescue
-                'Unable to retrieve tweet.'
+            match /twitter\.com\/[A-z0-9_]+\/status\/(\d+)/, :use_prefix => false, method: :retrieve
+            def retrieve(m, tweet_id)
+                begin
+                    tweet = @twitter_client.status(tweet_id)
+                rescue
+                    puts $!
+                    m.reply("aw heck i'm broken :(")
+                else
+                    m.reply("(@#{tweet.user.screen_name}) #{tweet.text}")
+                end
             end
 
-            def execute(m, tweet_id)
-                tweet = self.class.get_tweet(tweet_id)
-                m.reply("(@#{tweet.user.screen_name}) #{tweet.text}")
+            match /^!tweet (.+)$/, :use_prefix => false, method: :send
+            def send(m, tweet_content)
+                begin
+                    tweet = @twitter_client.update(tweet_content)
+                rescue
+                    puts $!
+                    m.reply("aw heck i'm broken :(")
+                else
+                    m.reply("(@#{tweet.user.screen_name}) #{tweet.text}")
+                end
             end
         end
     end
