@@ -6,6 +6,7 @@ module Cinch
     module Twitter
         class Simple
             include Cinch::Plugin
+            attr_reader :twitter_client
 
 
             def initialize(*args)
@@ -22,6 +23,7 @@ module Cinch
                 begin
                     tweet = @twitter_client.status(tweet_id)
                 rescue
+                    puts $!
                     m.reply("aw heck i'm broken :(")
                 else
                     m.reply("(@#{tweet.user.screen_name}) #{tweet.text}")
@@ -33,6 +35,7 @@ module Cinch
                 begin
                     tweet = @twitter_client.update(tweet_content)
                 rescue
+                    puts $!
                     m.reply("aw heck i'm broken :(")
                 else
                     m.reply("(@#{tweet.user.screen_name}) #{tweet.text}")
